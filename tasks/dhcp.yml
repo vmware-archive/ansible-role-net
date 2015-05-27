@@ -1,0 +1,12 @@
+---
+- name: Prep Install Components
+  wait_for: timeout=5
+
+- name: install dhcp
+  yum: name={{ item }} state=present
+  with_items:
+   - dhcp
+
+- name: configure dhcp
+  template: src=../templates/dhcpd.conf dest="{{ dhcp_conf_dest }}"
+  notify: restart dhcpd
