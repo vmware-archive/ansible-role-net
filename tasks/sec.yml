@@ -1,0 +1,13 @@
+---
+- name: configure iptables
+  command: /sbin/iptables -P INPUT ACCEPT
+  
+- name: flush iptables
+  command: /sbin/iptables -F
+  
+- name: save iptables
+  command: /sbin/iptables-save
+  notify: restart iptables
+  
+- name: set selinux to permissive
+  selinux: policy=targeted state=permissive
