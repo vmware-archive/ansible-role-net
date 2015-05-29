@@ -1,9 +1,9 @@
 ---
 - name: restart iptables
   service: name=iptables state=restarted enabled=yes
-  
+
 - name: restart dhcpd
   service: name=dhcpd state=restarted enabled=yes
- 
+
 - name: restart xinetd
   service: name=xinetd state=restarted enabled=yes
