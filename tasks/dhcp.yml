@@ -1,12 +1,12 @@
 ---
 - name: Prep Install Components
-  wait_for: timeout=5
+  wait_for: timeout=2
 
-- name: install dhcp
-  yum: name={{ item }} state=present
+- name: install components ubuntu
+  apt: name={{ item }} state=present
   with_items:
-   - dhcp
+   - isc-dhcp-server
 
-- name: configure dhcp
-  template: src=../templates/dhcpd.conf dest="{{ dhcp_conf_dest }}"
-  notify: restart dhcpd
+- name: configure isc-dhcp-server
+  template: src=../templates/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  notify: restart isc-dhcp-server

@@ -1,14 +1,6 @@
 ---
-- name: Prep for Installing Components
-  wait_for: timeout=3
-
-- name: install components CentOS
-  yum: name={{ item }} state=present
-  with_items:
-   - xinetd
-   - syslinux
-   - tftp-server
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+- name: Prep wait
+  wait_for: timeout=2
 
 - name: install components Debian
   apt: name={{ item }} state=present
@@ -17,15 +9,16 @@
    - tftpd
    - tftp
    - syslinux
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: configure xinetd
   template: src=../templates/tftp dest=/etc/xinetd.d/tftp
   notify: restart xinetd
 
-- name: iptables-config
-  template: src=../templates/iptables-config dest=/etc/sysconfig
-  notify: restart iptables
+- name: restart xinetd
+  command: /etc/init.d/xinetd restart
+
+- name: restart xinetd#
+  command: /etc/init.d/xinetd start
 
 - name: make tftp boot dir
   file: path={{ tftp_root }} state=directory
@@ -34,10 +27,10 @@
   file: path={{ tftp_root }} mode=0777
 
 - name: copy autodeploy zip
-  copy: src="{{ tftp_zip }}/deploy-tftpd.tbz2" dest=/tftpboot/deploy-tftpd.tbz2
+  copy: src=/etc/ansible/tmp/deploy-tftpd.tbz2 dest=/tftpboot/deploy-tftpd.tbz2
 
 - name: unzip autodeploy zip
   command: chdir={{ tftp_root }} /bin/tar xvjf deploy-tftpd.tbz2
 
 - name: rm autodeploy zip
-  command: chdir={{ tftp_root }} /bin/rm {{ tftp_root }}/deploy-tftpd.tbz2
+  command: /bin/rm {{ tftp_root }}/deploy-tftpd.tbz2

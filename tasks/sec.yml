@@ -1,5 +1,5 @@
 ---
-- name: configure iptables
+- name: allow all INPUT
   command: /sbin/iptables -P INPUT ACCEPT
 
 - name: flush iptables
@@ -7,7 +7,4 @@
 
 - name: save iptables
   command: /sbin/iptables-save
-  notify: restart iptables
-
-- name: set selinux to permissive
-  selinux: policy=targeted state=permissive
+  notify: restart ufw

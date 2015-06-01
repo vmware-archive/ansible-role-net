@@ -1,4 +1,8 @@
----
-- include: sec.yml
-- include: tftp.yml
-- include: dhcp.yml
+- name: iptables setup
+  include: sec.yml
+
+- name: Install dhcp ubuntu
+  include: dhcp.yml
+
+- name: tftp ubuntu
+  include: tftp.yml
