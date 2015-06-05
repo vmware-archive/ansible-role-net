@@ -1,0 +1,9 @@
+---
+- name: install components
+  yum: name={{ item }} state=present
+  with_items:
+   - dhcp
+
+- name: configure dhcp
+  template: src=../templates/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
+  notify: restart dhcpd

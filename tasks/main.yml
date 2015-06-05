@@ -1,8 +1,15 @@
+---
 - name: iptables setup
   include: sec.yml
 
-- name: Install dhcp ubuntu
-  include: dhcp.yml
+- name: Install dhcp Centos
+  include: cent_dhcp.yml
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Red Hat Enterprise Linux"
 
-- name: tftp ubuntu
-  include: tftp.yml
+- name: Install tftp Centos
+  include: cent_tftp.yml
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Red Hat Enterprise Linux"
+
+- name: Install dhcp ubuntu
+  include: ubuntu_dhcp.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

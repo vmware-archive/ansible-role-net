@@ -2,12 +2,11 @@
 - name: Prep wait
   wait_for: timeout=2
 
-- name: install components Debian
-  apt: name={{ item }} state=present
+- name: install components Centos
+  yum: name={{ item }} state=present
   with_items:
    - xinetd
-   - tftpd
-   - tftp
+   - tftp-server
    - syslinux
 
 - name: configure xinetd
@@ -21,13 +20,10 @@
   command: /etc/init.d/xinetd start
 
 - name: make tftp boot dir
-  file: path={{ tftp_root }} state=directory
-
-- name: file perms for tftproot
-  file: path={{ tftp_root }} mode=0777
+  file: path={{ tftp_root }} state=directory mode=0777
 
 - name: copy autodeploy zip
-  copy: src=/etc/ansible/tmp/deploy-tftpd.tbz2 dest=/tftpboot/deploy-tftpd.tbz2
+  copy: src="{{ autozip_src }}" dest={{ tftp_root }}/deploy-tftpd.tbz2
 
 - name: unzip autodeploy zip
   command: chdir={{ tftp_root }} /bin/tar xvjf deploy-tftpd.tbz2
