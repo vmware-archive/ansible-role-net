@@ -1,15 +1,15 @@
 ---
+- name: restart iptables
+  service: name=iptables state=restarted enabled=yes
+
 - name: restart dhcpd
   service: name=dhcpd state=restarted enabled=yes
 
-- name: restart isc-dhcp-server
-  service: name=isc-dhcp-server state=restarted enabled=yes
+- name: restart xinetd
+  service: name=xinetd state=restarted enabled=yes
 
 - name: restart ufw
   service: name=ufw state=restarted enabled=yes
 
-- name: restart iptables
-  service: name=iptables state=restarted enabled=yes
-  
-- name: restart xinetd
-  service: name=xinetd state=restarted enabled=yes
+- name: restart isc-dhcp-server
+  service: isc-dhcp-server state=restarted enabled=yes

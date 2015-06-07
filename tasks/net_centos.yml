@@ -1,0 +1,9 @@
+---
+- name: allow all INPUT Centos
+  include: cnt_sec.yml
+
+- name: install dhcp Centos
+  include: cnt_dhcp.yml
+
+- name: install tftp Centos
+  include: cnt_tftp.yml

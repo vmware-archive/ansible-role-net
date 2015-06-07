@@ -1,0 +1,3 @@
+#!gpxe
+set filename https://{{ vcenter_host }}:6501/vmw/rbd/tramp
+chain https://{{ vcenter_host }}:6501/vmw/rbd/tramp

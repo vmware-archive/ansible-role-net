@@ -1,7 +1,4 @@
 ---
-- name: Prep Install Components
-  wait_for: timeout=2
-
 - name: install components ubuntu
   apt: name={{ item }} state=present
   with_items:
@@ -9,4 +6,6 @@
 
 - name: configure isc-dhcp-server
   template: src=../templates/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
-  notify: restart isc-dhcp-server
+
+- name: restart isc-dhcp-server service
+  command: /usr/sbin/service isc-dhcp-server restart

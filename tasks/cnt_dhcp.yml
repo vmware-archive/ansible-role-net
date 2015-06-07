@@ -6,4 +6,9 @@
 
 - name: configure dhcp
   template: src=../templates/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
-  notify: restart dhcpd
+
+- name: restart dhcpd
+  command: /sbin/service dhcpd restart
+  
+- name: chkconfig dhcpd on
+  command: /sbin/chkconfig dhcpd on

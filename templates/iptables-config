@@ -1,5 +1,3 @@
----
----
 # Load additional iptables modules (nat helpers)
 #   Default: -none-
 # Space separated list of nat helpers (e.g. 'ip_nat_ftp ip_nat_irc'), which

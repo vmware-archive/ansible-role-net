@@ -1,0 +1,9 @@
+---
+- name: allow all INPUT
+  include: ubt_sec.yml
+
+- name: install dhcp Centos
+  include: ubt_dhcp.yml
+
+- name: install tftp Centos
+  include: ubt_tftp.yml

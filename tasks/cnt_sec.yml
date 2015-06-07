@@ -1,0 +1,18 @@
+---
+- name: allow all INPUT Centos
+  command: /sbin/iptables -P INPUT ACCEPT
+
+- name: flush iptables Centos
+  command: /sbin/iptables -F
+
+- name: iptables-config 
+  template: src=../templates/iptables-config dest=/etc/sysconfig
+
+- name: save iptables Centos
+  command: /sbin/iptables-save
+
+- name: set selinux to permissive
+  selinux: policy=targeted state=permissive
+
+- name: restart iptables
+  command: /sbin/service iptables restart

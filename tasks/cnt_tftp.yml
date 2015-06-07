@@ -1,0 +1,35 @@
+---
+- name: Prep wait
+  wait_for: timeout=2
+
+- name: install components CentOS
+  yum: name={{ item }} state=present
+  with_items:
+   - xinetd
+   - syslinux
+   - tftp-server
+   - httpd
+
+- name: configure xinetd
+  template: src=../templates/tftp dest=/etc/xinetd.d/tftp
+
+- name: make tftp boot dir
+  file: path={{ tftp_root }} state=directory mode=0777
+
+- name: copy autodeploy zip
+  copy: src="{{ autozip_src }}" dest="{{ tftp_root }}/deploy-tftpd.tbz2"
+
+- name: unzip autodeploy zip
+  command: chdir={{ tftp_root }} /bin/tar xvjf deploy-tftpd.tbz2
+  
+- name: create tramp file
+  template: src=../templates/tramp dest="{{ tftp_root }}/tramp"
+
+- name: rm autodeploy zip
+  command: /bin/rm {{ tftp_root }}/deploy-tftpd.tbz2
+  
+- name: restart tftp service
+  command: /sbin/service xinetd restart
+
+- name: chkconfig tftp on
+  command: /sbin/chkconfig xinetd on

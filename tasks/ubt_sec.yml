@@ -1,0 +1,12 @@
+---
+- name: allow all INPUT ubt
+  command: /sbin/iptables -P INPUT ACCEPT
+
+- name: flush iptables ubt
+  command: /sbin/iptables -F
+
+- name: save iptables ubt
+  command: /sbin/iptables-save
+
+- name: restart iptables
+  command: /usr/sbin/service iptables restart
