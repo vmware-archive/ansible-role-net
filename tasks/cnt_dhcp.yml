@@ -7,6 +7,9 @@
 - name: configure dhcp
   template: src=../templates/dhcpd.conf dest=/etc/dhcp/dhcpd.conf
 
+- name: config hosts.allow
+  template: src=../templates/hosts.allow dest=/etc/hosts.allow
+
 - name: restart dhcpd
   command: /sbin/service dhcpd restart
   
