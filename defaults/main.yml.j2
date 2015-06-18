@@ -1,0 +1,27 @@
+---
+iptables_mods: "ip_conntrack_tftp"
+autozip_src: '/opt/supervio-ansible/playbooks/supervio/tmp/deploy-tftpd.tbz2'
+datacenter:
+  name: "{{ datacenter_name }}"
+  clusters:
+  - name: "{{ vio_cluster_mgmt }}"
+    hosts:
+{% for host in mgmt_hosts %}
+    - name: "{{ host[name] }}"
+      ip: "{{ host[ip] }}"
+      mac: "{{ host[mac] }}"
+{% endfor %}
+  - name: "{{ vio_cluster_edge }}"
+    hosts:
+{% for host in edge_hosts %}
+    - name: "{{ host[name] }}"
+      ip: "{{ host[ip] }}"
+      mac: "{{ host[mac] }}"
+{% endfor %}
+  - name: "{{ vio_cluster_compute }}"
+    hosts:
+{% for host in compute_hosts %}
+    - name: "{{ host[name] }}"
+      ip: "{{ host[ip] }}"
+      mac: "{{ host[mac] }}"
+{% endfor %}
