@@ -7,6 +7,3 @@
 
 - name: save iptables ubt
   command: /sbin/iptables-save
-
-- name: restart iptables
-  command: /usr/sbin/service iptables restart
