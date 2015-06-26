@@ -29,9 +29,9 @@ VCSA_ENABLE_SSH=True
 VCSA_DEPLOYMENT_SIZE=management-tiny
 
 # Configuration for SSO
-SSO_DOMAIN_NAME=vsphere.local
+SSO_DOMAIN_NAME="{{ dom_name }}"
 SSO_SITE_NAME=vsphere
-SSO_ADMIN_PASSWORD=VMware1!
+SSO_ADMIN_PASSWORD="{{ vcenter_password }}"
 
 # NTP Servers
 NTP_SERVERS=0.pool.ntp.org
