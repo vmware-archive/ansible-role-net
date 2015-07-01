@@ -2,6 +2,9 @@
 - name: allow all INPUT
   include: ubt_sec.yml
 
+- name: install a known version of syslinux
+  include: install_known_syslinux.yml
+
 - name: install dhcp Centos
   include: ubt_dhcp.yml
 

@@ -1,0 +1,12 @@
+---
+- name: download syslinux
+  get_url: url={{ syslinux_url }} dest=/tmp/{{ syslinux_package }} sha256sum={{ syslinux_sha256sum }}
+
+- name: unzip syslinux
+  unarchive: src=/tmp/{{ syslinux_package }} dest={{ syslinux_dest }} creates={{ syslinux_dest }}/{{ syslinux_version }}
+
+# now this should exist: /var/lib/syslinux-3.86/core/pxelinux.0
+- stat: path={{ syslinux_dest }}/{{ syslinux_version }}/core/pxelinux.0
+  register: st
+- fail: msg="Failed to get pxelinux.0"
+  when: not st.stat.exists
