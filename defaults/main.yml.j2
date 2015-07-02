@@ -1,14 +1,16 @@
 ---
+{% raw %}
 iptables_mods: "ip_conntrack_tftp"
 # the autodeploy src is created on the vc server by the autodeploy role and pulled locally
 # to this location. In this role, we deposit it in the tftp root.
 autozip_src: '/opt/supervio-ansible/playbooks/supervio/tmp/deploy-tftpd.tbz2'
 
 syslinux_version: syslinux-3.86
-syslinux_package: syslinux-3.86.tar.xz
+syslinux_package: {{ syslinux_version }}.tar.xz
 syslinux_sha256sum: 7ab1d14b1c09e13e3259e35a70a313db8bf66b882f1521291eeabf97c1981477
-syslinux_url: https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-3.86.tar.xz
+syslinux_url: https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/{{ syslinux_package }}
 syslinux_dest: /var/lib
+{% endraw %}
 
 datacenter:
   name: "{{ datacenter_name }}"
