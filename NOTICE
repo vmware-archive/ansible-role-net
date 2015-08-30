@@ -1,4 +1,5 @@
-{#
+COPYRIGHT AND LICENSE
+
    Copyright 2015 VMware, Inc.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +13,6 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-#} 
-#!gpxe
-set filename https://{{ vcenter_host }}:6501/vmw/rbd/tramp
-chain https://{{ vcenter_host }}:6501/vmw/rbd/tramp
+ 
+ 
+THIRD PARTY NOTICES:
